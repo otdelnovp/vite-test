@@ -1,28 +1,34 @@
 {
-	"compilerOptions": {
-		"target": "ESNext",
-		"useDefineForClassFields": true,
-		"lib": ["DOM", "DOM.Iterable", "ESNext"],
-		"allowJs": false,
-		"skipLibCheck": true,
-		"esModuleInterop": false,
-		"allowSyntheticDefaultImports": true,
-		"strict": true,
-		"forceConsistentCasingInFileNames": true,
-		"module": "ESNext",
-		"moduleResolution": "Node",
-		"resolveJsonModule": true,
-		"isolatedModules": true,
-		"noEmit": true,
-		"jsx": "react-jsx",
-		"baseUrl": "./",
-		"paths": {
-			"@/*": ["src/*"],
-			"@images/*": ["src/static/images/*"],
-			"@icons/*": ["src/static/icons/*"],
-			"crypto": ["node_modules/crypto-js"]
-		}
-	},
-	"include": ["src"],
-	"references": [{ "path": "./tsconfig.node.json" }]
+    "compilerOptions": {
+        "target": "ESNext",
+        "useDefineForClassFields": true,
+        "lib": ["DOM", "DOM.Iterable", "ESNext"],
+        "allowJs": false,
+        "skipLibCheck": true,
+        "esModuleInterop": false,
+        "allowSyntheticDefaultImports": true,
+        "strict": true,
+        "forceConsistentCasingInFileNames": true,
+        "module": "ESNext",
+        "moduleResolution": "Node",
+        "resolveJsonModule": true,
+        "isolatedModules": true,
+        "noEmit": true,
+        "jsx": "react-jsx",
+        "baseUrl": "./",
+        "paths": {
+            "@/*": ["src/*"],
+            "@core/*": ["src/core/*"],
+            "@pages/*": ["src/pages/*"],
+            "@helpers/*": ["src/helpers/*"],
+            "@services/*": ["src/services/*"],
+            "@hooks/*": ["src/hooks/*"],
+            "@theme/*": ["src/theme/*"],
+            "@images/*": ["src/static/images/*"],
+            "@icons/*": ["src/static/icons/*"]
+        }
+    },
+    "include": ["src"],
+    "references": [{ "path": "./tsconfig.node.json" }]
 }
+

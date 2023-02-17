@@ -1,6 +1,6 @@
 import React from 'react';
+import { Md5 } from 'ts-md5';
 // import moment from 'moment';
-import crypto from 'crypto';
 
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material';
@@ -15,7 +15,7 @@ export const getMarkerPoint = (markerData: [number, number]) => {
     return undefined;
 };
 
-export const getHash = (value: string) => crypto.createHash('md5').update(value).digest('hex');
+export const getHash = (value: string) => Md5.hashStr(value);
 
 export const guidEmpty = '00000000-0000-0000-0000-000000000000';
 export const getGuid = () => {
