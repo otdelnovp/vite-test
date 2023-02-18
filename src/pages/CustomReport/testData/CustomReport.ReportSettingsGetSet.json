@@ -1,0 +1,63 @@
+{
+    "id": "96721418-8521-4fdf-856b-3a0d9a2ca4d4",
+    "name": "Отчет по пользователям организаций",
+    "tables": ["users", "companies"],
+    "tableFields": [
+        {
+            "table": "users",
+            "field": "username",
+            "title": "Логин",
+            "order": 1
+        },
+        {
+            "table": "users",
+            "field": "user_status",
+            "title": "Статус пользователя",
+            "order": 2
+        },
+        {
+            "table": "companies",
+            "field": "Name",
+            "title": "Организация",
+            "order": 3
+        },
+        {
+            "table": "companies",
+            "field": "Phone",
+            "title": "Рабочий телефон",
+            "order": 4
+        }
+    ],
+    "relations": [
+        {
+            "table1": "users",
+            "joinType": "LEFT",
+            "table2": "companies",
+            "table1Field": "org_id",
+            "comparsionType": "equal",
+            "table2Field": "companies"
+        }
+    ],
+    "conditions": [
+        {
+            "table": "users",
+            "field": "username",
+            "comparsionType": "equal",
+            "value": "ivanov"
+        }
+    ],
+    "sort": [
+        {
+            "table": "companies",
+            "field": "Name",
+            "sortType": "ASC",
+            "order": 1
+        },
+        {
+            "table": "users",
+            "field": "username",
+            "sortType": "ASC",
+            "order": 2
+        }
+    ]
+}

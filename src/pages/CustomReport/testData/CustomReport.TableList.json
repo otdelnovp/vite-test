@@ -1,0 +1,72 @@
+[
+    {
+        "title": "Пользователи",
+        "name": "users",
+        "columns": [
+            {
+                "title": "ИД",
+                "name": "id"
+            },
+            {
+                "title": "Логин",
+                "name": "username"
+            },
+            {
+                "title": "ИДОрганизации",
+                "name": "org_id"
+            },
+            {
+                "title": "Статус",
+                "name": "user_status"
+            }
+        ]
+    },
+    {
+        "title": "Организации",
+        "name": "companies",
+        "columns": [
+            {
+                "title": "ИД",
+                "name": "Id"
+            },
+            {
+                "title": "Наименование",
+                "name": "Name"
+            },
+            {
+                "title": "ИНН",
+                "name": "INN"
+            },
+            {
+                "title": "KPP",
+                "name": "КПП"
+            },
+            {
+                "title": "ЮрАдрес",
+                "name": "LegalAddress"
+            },
+            {
+                "title": "Phone",
+                "name": "Телефон"
+            }
+        ]
+    },
+    {
+        "title": "Проекты",
+        "name": "projects",
+        "columns": [
+            {
+                "title": "ИД",
+                "name": "Id"
+            },
+            {
+                "title": "Наименование",
+                "name": "Name"
+            },
+            {
+                "title": "ИД организации",
+                "name": "CompanyId"
+            }
+        ]
+    }
+]

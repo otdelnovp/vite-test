@@ -1,0 +1,26 @@
+[
+    {
+        "code": "equal",
+        "name": "Равно"
+    },
+    {
+        "code": "not_equal",
+        "name": "Не равно"
+    },
+    {
+        "code": "more",
+        "name": "Больше>"
+    },
+    {
+        "code": "less",
+        "name": "Меньше"
+    },
+    {
+        "code": "more_or_equal",
+        "name": "Больше или равно"
+    },
+    {
+        "code": "less_or_equal",
+        "name": "Меньше или равно"
+    }
+]

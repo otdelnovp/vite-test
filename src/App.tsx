@@ -1,26 +1,52 @@
-import { useState } from 'react';
-import reactLogo from './assets/react.svg';
-import { phoneMask } from '@helpers/methods';
+import React, { useEffect } from 'react';
+import { Routes, Route } from 'react-router-dom';
+import { connect, ConnectedProps, useDispatch } from 'react-redux';
+import { compose } from 'redux';
 
-function App() {
-    const [count, setCount] = useState(0);
+import { ThemeProvider } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
+
+import { Configuration } from './config';
+
+import { RootState } from '@services/index';
+import { userSelector, setDarkMode } from '@services/userService';
+
+import routes from '@pages/routes';
+import Layout from '@core/Layout/Layout';
+
+import { theme } from './theme';
+
+const App = ({ user, darkMode }: AppReduxProps) => {
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        const darkModeStorage = localStorage.getItem('darkMode') === 'true';
+        if (darkModeStorage !== darkMode) {
+            dispatch(setDarkMode({ darkMode: darkModeStorage }));
+        }
+    }, []);
 
     return (
-        <div className="App">
-            <div>
-                <a href="https://reactjs.org" target="_blank">
-                    <img src={reactLogo} className="logo react" alt="React logo" />
-                </a>
-            </div>
-            <h1>Vite + React</h1>
-            <div className="card">
-                <button onClick={() => setCount((count) => count + 1)}>count is {count}</button>
-                <p>{phoneMask('1111')}</p>
-            </div>
-            <p className="read-the-docs">Click on the Vite and React logos to learn more</p>
-        </div>
+        <ThemeProvider theme={theme(darkMode)}>
+            <CssBaseline />
+            <Layout hideMenu={Configuration.HIDE_MENU}>
+                <Routes>
+                    {routes(user).map(({ page: Page, status, ...route }) => (
+                        <Route key={route.path} element={<Page />} {...route} />
+                    ))}
+                </Routes>
+            </Layout>
+        </ThemeProvider>
     );
-}
+};
 
-export default App;
+const mapStateToProps = (state: RootState) => {
+    const { user, darkMode } = userSelector(state);
+    return { user, darkMode };
+};
+
+const connector = connect(mapStateToProps);
+type AppReduxProps = ConnectedProps<typeof connector>;
+
+export default compose(connector)(App);
 

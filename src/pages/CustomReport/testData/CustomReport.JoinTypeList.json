@@ -1,0 +1,18 @@
+[
+    {
+        "code": "inner",
+        "name": "Внутреннее"
+    },
+    {
+        "code": "full",
+        "name": "Полное"
+    },
+    {
+        "code": "left",
+        "name": "Левое"
+    },
+    {
+        "code": "right",
+        "name": "Правое"
+    }
+]
