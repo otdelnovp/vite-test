@@ -1,4 +1,3 @@
-console.log(1111, import.meta.env);
 export const Configuration = {
     API_URL: import.meta.env.VITE_API_URL || '',
     SIGN: import.meta.env.VITE_API_SIGN || '',
