@@ -163,8 +163,6 @@ const Login = ({ isLoading, user, light }: LoginReduxProps) => {
 
     const validationErrors = validateLoginFields(body);
 
-    console.log(4444, Configuration);
-
     const loginForm = (
         <Box className={classes.login}>
             <Typography component="h1" variant="h5" gutterBottom>
