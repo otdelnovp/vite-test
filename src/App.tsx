@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { useEffect } from 'react';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { connect, ConnectedProps, useDispatch } from 'react-redux';
 import { compose } from 'redux';
 
@@ -26,15 +26,13 @@ const App = ({ user, darkMode }: AppReduxProps) => {
         }
     }, []);
 
+    const router = createBrowserRouter(routes(user));
+
     return (
         <ThemeProvider theme={theme(darkMode)}>
             <CssBaseline />
             <Layout hideMenu={Configuration.HIDE_MENU}>
-                <Routes>
-                    {routes(user).map(({ page: Page, status, ...route }) => (
-                        <Route key={route.path} element={<Page />} {...route} />
-                    ))}
-                </Routes>
+                <RouterProvider router={router} />
             </Layout>
         </ThemeProvider>
     );

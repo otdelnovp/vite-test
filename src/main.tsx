@@ -1,7 +1,6 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import * as serviceWorker from './serviceWorker';
-import { BrowserRouter } from 'react-router-dom';
 import { CookiesProvider } from 'react-cookie';
 import { Provider } from 'react-redux';
 import { createLogger } from 'redux-logger';
@@ -24,15 +23,11 @@ const root = createRoot(document.getElementById('root')!);
 root.render(
     <Provider store={store}>
         <CookiesProvider>
-            <BrowserRouter>
-                <React.StrictMode>
-                    <App />
-                </React.StrictMode>
-            </BrowserRouter>
+            <React.StrictMode>
+                <App />
+            </React.StrictMode>
         </CookiesProvider>
     </Provider>,
-
-    // document.getElementById('root'),
 );
 
 serviceWorker.unregister();
