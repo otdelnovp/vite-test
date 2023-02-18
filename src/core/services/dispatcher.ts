@@ -106,38 +106,36 @@ const emptyAsyncOptions: IAsyncOptions = {
     params: {},
 };
 
-export const asyncRequestAction = (
-    params: IAsyncRequestType,
-    actionTypes: any,
-    options = emptyAsyncOptions,
-): AppThunk => async (dispatch: any) => {
-    try {
-        dispatch(actionTypes.request(options.params));
-        const fetchData = await createRequest(params);
-        // @ts-ignore
-        const { error, body } = fetchData.data as IServerResponse;
-        const { onSuccess, successText, onError } = options;
-        if (error) {
-            if (error.code < 1000) {
-                dispatch(alertActions.alertError({ message: error.msg }));
+export const asyncRequestAction =
+    (params: IAsyncRequestType, actionTypes: any, options = emptyAsyncOptions): AppThunk =>
+    async (dispatch: any) => {
+        try {
+            dispatch(actionTypes.request(options.params));
+            const fetchData = await createRequest(params);
+            // @ts-ignore
+            const { error, body } = fetchData.data as IServerResponse;
+            const { onSuccess, successText, onError } = options;
+            if (error) {
+                if (error.code < 1000) {
+                    dispatch(alertActions.alertError({ message: error.msg }));
+                }
+                if (onError && typeof onError === 'function') {
+                    onError(body);
+                }
+                dispatch(actionTypes.failure(error));
+            } else {
+                dispatch(actionTypes.success({ result: body }));
+                if (onSuccess && typeof onSuccess === 'function') {
+                    onSuccess(body);
+                }
+                if (successText && successText.length > 0) {
+                    dispatch(alertActions.alertSuccess({ message: successText }));
+                }
             }
-            if (onError && typeof onError === 'function') {
-                onError(body);
-            }
-            dispatch(actionTypes.failure(error));
-        } else {
-            dispatch(actionTypes.success({ result: body }));
-            if (onSuccess && typeof onSuccess === 'function') {
-                onSuccess(body);
-            }
-            if (successText && successText.length > 0) {
-                dispatch(alertActions.alertSuccess({ message: successText }));
-            }
+        } catch (err) {
+            dispatch(actionTypes.failure({ message: err }));
         }
-    } catch (err) {
-        dispatch(actionTypes.failure({ message: err }));
-    }
-};
+    };
 
 // Запрос к сервису Open Street Map
 // http://router.project-osrm.org/table/v1/driving/13.388860,52.517037;13.397634,52.529407;13.428555,52.523219?annotations=duration,distance
@@ -158,33 +156,31 @@ export const createRequestOSM = (params: IAsyncRequestType, url = Configuration.
     );
 };
 
-export const asyncRequestActionOSM = (
-    params: IAsyncRequestType,
-    actionTypes: any,
-    options = emptyAsyncOptions,
-): AppThunk => async (dispatch: any) => {
-    try {
-        dispatch(actionTypes.request(options.params));
-        const fetchData = await createRequestOSM(params);
-        // @ts-ignore
-        const { data, message } = fetchData as IServerResponse;
-        const { onSuccess, successText, onError } = options;
-        if (message) {
-            dispatch(alertActions.alertError({ message: message }));
-            if (onError && typeof onError === 'function') {
-                onError(message);
+export const asyncRequestActionOSM =
+    (params: IAsyncRequestType, actionTypes: any, options = emptyAsyncOptions): AppThunk =>
+    async (dispatch: any) => {
+        try {
+            dispatch(actionTypes.request(options.params));
+            const fetchData = await createRequestOSM(params);
+            // @ts-ignore
+            const { data, message } = fetchData as IServerResponse;
+            const { onSuccess, successText, onError } = options;
+            if (message) {
+                dispatch(alertActions.alertError({ message: message }));
+                if (onError && typeof onError === 'function') {
+                    onError(message);
+                }
+                dispatch(actionTypes.failure(message));
+            } else {
+                dispatch(actionTypes.success({ result: data }));
+                if (onSuccess && typeof onSuccess === 'function') {
+                    onSuccess(data);
+                }
+                if (successText?.length) {
+                    dispatch(alertActions.alertSuccess({ message: successText }));
+                }
             }
-            dispatch(actionTypes.failure(message));
-        } else {
-            dispatch(actionTypes.success({ result: data }));
-            if (onSuccess && typeof onSuccess === 'function') {
-                onSuccess(data);
-            }
-            if (successText?.length) {
-                dispatch(alertActions.alertSuccess({ message: successText }));
-            }
+        } catch (err) {
+            dispatch(actionTypes.failure({ message: err }));
         }
-    } catch (err) {
-        dispatch(actionTypes.failure({ message: err }));
-    }
-};
+    };
